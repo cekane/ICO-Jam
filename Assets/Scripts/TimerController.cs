@@ -30,6 +30,7 @@ public class TimerController : MonoBehaviour
 
     public void StartTimer(bool s)
     {
+        Debug.Log("You change the timer");
         timerStarted = s;
         timerText.enabled = true;
     }

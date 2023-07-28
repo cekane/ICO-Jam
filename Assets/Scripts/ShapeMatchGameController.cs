@@ -21,8 +21,8 @@ public class ShapeMatchGameController : MonoBehaviour, InstructionParent
     private System.Random random;
     private double halfHeight;
     private InstructionController controller;
-    private int numShapesLeft = 10;
-
+    private int numShapesLeft;
+    private bool gameStarted = false;
 
     public void StartMatchGame()
     {
@@ -37,7 +37,7 @@ public class ShapeMatchGameController : MonoBehaviour, InstructionParent
 
     void FixedUpdate()
     {
-        if(numShapesLeft <= 0)
+        if(gameStarted && numShapesLeft <= 0)
         {
             // you won
             timerController.StartTimer(false);
@@ -55,7 +55,6 @@ public class ShapeMatchGameController : MonoBehaviour, InstructionParent
 
     void InstructionParent.StartButtonClick()
     {
-        Debug.Log("In here");
         // Setup where the holes are placed
         SetupHoles();
         // Randomly place where the shapes will be
@@ -63,6 +62,7 @@ public class ShapeMatchGameController : MonoBehaviour, InstructionParent
         controller.HideDescriptionUI();
         // Start timer
         timerController.StartTimer(true);
+        gameStarted = true;
     }
 
     private void SetupHoles()
@@ -103,6 +103,7 @@ public class ShapeMatchGameController : MonoBehaviour, InstructionParent
 
     public void UpdateNumShapesLeft(int num)
     {
+        Debug.Log("Num shapes updated" + numShapesLeft);
         numShapesLeft += num;
     }
 
